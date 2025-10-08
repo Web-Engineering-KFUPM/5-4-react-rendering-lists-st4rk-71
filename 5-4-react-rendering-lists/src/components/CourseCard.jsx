@@ -36,34 +36,47 @@ export default function CourseCard({ course, index, onMutateCourse }) {
 
 
       {/* 🟩 PART A (Anchor): If NO tasks → show message; ELSE → render the list (ternary ?: ) */}
-      <section className="tasksSection">
-        {/* 📘 TASK 2 — Render Tasks for Each Course */}
-        {/* 🔎 Anchor: You’ll write your code right inside this list. */}
-        <ul className="tasks">
-          {/* TODO: course.tasks.map(task => <TaskItem key={task.id} task={task} onToggle={toggleTask} onDelete={deleteTask} />) */}
-        </ul>
-      </section>
-
-
-      {/* Add Form (provided) */}
-      <form onSubmit={addTask} className="newTask">
-        <input
-          className="titleField"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Task title"
-          aria-label="Task title"
+  
+<section className="tasksSection">
+  {/* 📘 TASK 2 — Render Tasks for Each Course */}
+  <ul className="tasks">
+    {course.tasks.length === 0 ? (
+      <li className="empty">No tasks yet. Add one below!</li>
+    ) : (
+      course.tasks.map((task) => (
+        <TaskItem
+          key={task.id}
+          task={task}
+          onToggle={toggleTask}
+          onDelete={deleteTask}
         />
-        <div className="dateRow">
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            aria-label="Due date"
-          />
-          <button type="submit" className="primary">Add</button>
-        </div>
-      </form>
+      ))
+    )}
+  </ul>
+</section>
+
+{/* Add Form (provided) */}
+<form onSubmit={addTask} className="newTask">
+  <input
+    className="titleField"
+    value={title}
+    onChange={(e) => setTitle(e.target.value)}
+    placeholder="Task title"
+    aria-label="Task title"
+  />
+  <div className="dateRow">
+    <input
+      type="date"
+      value={date}
+      onChange={(e) => setDate(e.target.value)}
+      aria-label="Due date"
+    />
+    <button type="submit" className="primary">
+      Add
+    </button>
+  </div>
+</form>
+
     </article>
   );
 }
